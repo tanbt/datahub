@@ -75,6 +75,7 @@ import { GetDatasetQuery, useGetDatasetQuery, useUpdateDatasetMutation } from '@
 import { Dataset, DatasetProperties, EntityType, FeatureFlagsConfig, SearchResult } from '@types';
 
 import GovernMenuIcon from '@images/governMenuIcon.svg?react';
+import { DataPreviewTab } from '../shared/tabs/DataPreview/DataPreviewTab';
 
 const SUBTYPES = {
     VIEW: 'view',
@@ -391,6 +392,14 @@ export class DatasetEntity implements Entity<Dataset> {
                 name: 'Incidents',
                 icon: WarningOutlined,
                 component: IncidentTab,
+                getCount: (_, dataset) => {
+                    return dataset?.dataset?.activeIncidents?.total;
+                },
+            },
+            {
+                name: 'Data Preview',
+                icon: EyeOutlined,
+                component: DataPreviewTab,
                 getCount: (_, dataset) => {
                     return dataset?.dataset?.activeIncidents?.total;
                 },
